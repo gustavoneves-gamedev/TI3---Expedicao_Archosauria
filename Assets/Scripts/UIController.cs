@@ -3,12 +3,15 @@ using UnityEngine;
 public class UIController : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject interfaceMenu;
     [SerializeField] private GameObject controlMenu;
     [SerializeField] private GameObject tabletMenu;
 
     void Start()
     {
         GameController.gameController.uiController = this;
+        mainMenu.SetActive(true);
+        interfaceMenu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -20,6 +23,7 @@ public class UIController : MonoBehaviour
     public void BeginGame()
     {
         mainMenu.SetActive(false);
+        interfaceMenu.SetActive(true);
         GameController.gameController.BeginGame();
     }
 

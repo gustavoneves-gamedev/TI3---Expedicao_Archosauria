@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class UIController : MonoBehaviour
     {
         //mainMenu.SetActive(false);
         GameController.gameController.BeginGame();
+        SceneManager.LoadScene(1);
     }
 
     public void PauseGame()
@@ -38,16 +40,20 @@ public class UIController : MonoBehaviour
 
     public void ShowControls(bool isMoving = true)
     {
-       
+
         if (isMoving && controlMenu.activeSelf)
         {
             controlMenu.SetActive(false);
-           
+
         }
         else if (!isMoving && !controlMenu.activeSelf)
         {
             controlMenu.SetActive(true);
         }
+    }
+    public void ToTheScene(int scene)
+    {
+        SceneManager.LoadScene(scene);
     }
 
 }

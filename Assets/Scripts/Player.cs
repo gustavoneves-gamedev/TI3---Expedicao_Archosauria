@@ -28,7 +28,10 @@ public class Player : MonoBehaviour
         Debug.Log("a");
         Movement();
         DetectMovement();
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameController.gameController.uiController.PauseGame();
+        }
     }
 
     private void DetectMovement()

@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (!GameController.gameController.isPlaying || GameController.gameController.isPaused) return;
-        Debug.Log("a");
+        
         Movement();
         DetectMovement();
         if (Input.GetKeyDown(KeyCode.Escape))

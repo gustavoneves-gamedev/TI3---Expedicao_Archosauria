@@ -19,7 +19,7 @@ public class UIController : MonoBehaviour
 
     public void BeginGame()
     {
-        //mainMenu.SetActive(false);
+        mainMenu.SetActive(false);
         GameController.gameController.BeginGame();
     }
 

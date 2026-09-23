@@ -1,4 +1,5 @@
 using UnityEngine;
+[RequireComponent(typeof(CharacterController))]
 
 public class Player : MonoBehaviour
 {
@@ -24,14 +25,16 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (!GameController.gameController.isPlaying || GameController.gameController.isPaused) return;
-
-        Movement();
+        Debug.Log("a");
+        //Movement();
         DetectMovement();
 
     }
 
     private void DetectMovement()
     {
+        isMoving = cc.velocity.sqrMagnitude > 0.01f; 
+
         if (cc.velocity.magnitude <= 0)
         {
             idleTime -= Time.deltaTime;
@@ -41,7 +44,6 @@ public class Player : MonoBehaviour
                 idleTime = 0;
                 GameController.gameController.uiController.ShowControls(false);
             }
-            
         }
         else
         {
@@ -52,6 +54,8 @@ public class Player : MonoBehaviour
 
     private void Movement()
     {
+        Debug.Log("b");
+
         if (cc.isGrounded && fall < 0f)
         {
             fall = -2f;
@@ -70,7 +74,7 @@ public class Player : MonoBehaviour
         if(v != 0 || r != 0) isMoving = true;
         else isMoving = false;
 
-            Vector3 dir = transform.forward * v * speed;
+        Vector3 dir = transform.forward * v * speed;
         dir.y = fall;
 
         transform.Rotate(0f, r * rotateSpeed, 0f);

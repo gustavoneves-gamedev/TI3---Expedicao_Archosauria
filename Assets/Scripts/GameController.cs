@@ -12,7 +12,16 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        gameController = this;
+        if (gameController == null)
+        {
+            gameController = this;
+            DontDestroyOnLoad(this);
+            Time.timeScale = 0.0f;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

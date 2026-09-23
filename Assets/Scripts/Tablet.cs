@@ -9,7 +9,4 @@ public class Tablet : MonoBehaviour
         player = GetComponent<Player>();
     }
 
-    
-
-
 }

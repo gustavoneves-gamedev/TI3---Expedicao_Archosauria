@@ -16,7 +16,6 @@ public class GameController : MonoBehaviour
         {
             gameController = this;
             DontDestroyOnLoad(this);
-            Time.timeScale = 0.0f;
         }
         else
         {

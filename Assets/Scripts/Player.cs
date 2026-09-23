@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     {
         if (!GameController.gameController.isPlaying || GameController.gameController.isPaused) return;
         Debug.Log("a");
-        //Movement();
+        Movement();
         DetectMovement();
 
     }

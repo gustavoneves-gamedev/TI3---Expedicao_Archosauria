@@ -2931,7 +2931,6 @@ GameObject:
   - component: {fileID: 1063839781}
   - component: {fileID: 1063839780}
   - component: {fileID: 1063839784}
-  - component: {fileID: 1063839785}
   - component: {fileID: 1063839786}
   - component: {fileID: 1063839787}
   m_Layer: 0
@@ -3064,23 +3063,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1063839785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1063839779}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72d336f0f3c5e1540acede150c776c41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  speed: 10
-  rotateSpeed: 3
-  jumpHeight: 3
-  gravityValue: -50
-  fall: 0
 --- !u!114 &1063839786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3088,7 +3070,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1063839779}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ecd6527bec18a534aa04d2ac0c07a253, type: 3}
   m_Name: 

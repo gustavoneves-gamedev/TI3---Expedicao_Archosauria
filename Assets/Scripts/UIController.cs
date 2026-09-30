@@ -26,7 +26,6 @@ public class UIController : MonoBehaviour
         mainMenu.SetActive(false);
         interfaceMenu.SetActive(true);
         GameController.gameController.BeginGame();
-        SceneManager.LoadScene(1);
     }
 
     public void PauseGame()
@@ -55,9 +54,4 @@ public class UIController : MonoBehaviour
             controlMenu.SetActive(true);
         }
     }
-    public void ToTheScene(int scene)
-    {
-        SceneManager.LoadScene(scene);
-    }
-
 }

@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
     {
         if (!GameController.gameController.isPlaying || GameController.gameController.isPaused) return;
 
-        bool obstacleAhead = Physics.Raycast(transform.position + Vector3.up * -1f, transform.forward, out RaycastHit obstacleHit, obstacleMaxDistance, obstacleLayer);
+        bool obstacleAhead = Physics.Raycast(transform.position + Vector3.down * 1f, transform.forward, out RaycastHit obstacleHit, obstacleMaxDistance, obstacleLayer);
 
         if (climbLockTimer > 0f)
         {

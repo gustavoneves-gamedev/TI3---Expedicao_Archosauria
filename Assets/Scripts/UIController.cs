@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -42,16 +43,15 @@ public class UIController : MonoBehaviour
 
     public void ShowControls(bool isMoving = true)
     {
-       
+
         if (isMoving && controlMenu.activeSelf)
         {
             controlMenu.SetActive(false);
-           
+
         }
         else if (!isMoving && !controlMenu.activeSelf)
         {
             controlMenu.SetActive(true);
         }
     }
-
 }

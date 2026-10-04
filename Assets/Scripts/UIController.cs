@@ -7,6 +7,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject interfaceMenu;
     [SerializeField] private GameObject controlMenu;
     [SerializeField] private GameObject tabletMenu;
+    [SerializeField] private GameObject jumpMinigameTutorial;
 
     void Start()
     {
@@ -53,5 +54,10 @@ public class UIController : MonoBehaviour
         {
             controlMenu.SetActive(true);
         }
+    }
+
+    public void ShowJumpMinigameControls()
+    {
+        jumpMinigameTutorial.SetActive(true);
     }
 }

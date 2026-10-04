@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 
@@ -7,12 +8,14 @@ public class Player : MonoBehaviour
     public float gravityValue = -9.81f;
 
     public bool isMoving; //Pública apenas para fins de testes
+    public bool canMove = true;
 
     [Header("WALK")]
     public float rotateSpeed = 130f;
     public float walkSpeed = 10f;
     public float jumpHeight = 2.5f;
     public float fall;
+    public float v; //Variável que controla o movimento "Vertical" do Player
 
     [Header("CLIMB")]
     public float climbSpeedV = 5f;
@@ -23,7 +26,10 @@ public class Player : MonoBehaviour
     [SerializeField] private bool isClimbing;
     private float climbLockTimer;
 
+    public bool isInJumpMinigame;
     private float idleTime = 5f;
+    
+    
 
     void Start()
     {
@@ -34,7 +40,21 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (!GameController.gameController.isPlaying || GameController.gameController.isPaused) return;
+        if (!GameController.gameController.isPlaying || GameController.gameController.isPaused || !canMove) return;
+
+        if (isInJumpMinigame)
+        {
+            SideMovement();
+
+            if (Input.GetKeyDown(KeyCode.Space) && cc.isGrounded)
+            {
+                fall = Mathf.Sqrt(jumpHeight * -2f * gravityValue);
+                //isClimbing = false;
+                //climbLockTimer = climbLock;
+            }
+
+            return;
+        }
 
         bool obstacleAhead = Physics.Raycast(transform.position + Vector3.down * 1f, transform.forward, out RaycastHit obstacleHit, obstacleMaxDistance, obstacleLayer);
 
@@ -43,7 +63,7 @@ public class Player : MonoBehaviour
             climbLockTimer -= Time.deltaTime;
         }
 
-        if (Input.GetButtonDown("Jump") && (cc.isGrounded || isClimbing))
+        if (Input.GetKeyDown(KeyCode.Space) && (cc.isGrounded || isClimbing))
         {
             fall = Mathf.Sqrt(jumpHeight * -2f * gravityValue);
             isClimbing = false;
@@ -62,6 +82,10 @@ public class Player : MonoBehaviour
         if (isClimbing)
         {
             Climb();
+        }
+        else if (isInJumpMinigame)
+        {
+            SideMovement();
         }
         else
         {
@@ -106,15 +130,43 @@ public class Player : MonoBehaviour
 
         fall += gravityValue * Time.deltaTime;
 
-        float v = Input.GetAxis("Vertical");
+        v = Input.GetAxis("Vertical");
         float r = Input.GetAxis("Horizontal");
 
         isMoving = v != 0 || r != 0;
+
+        if (GameController.gameController.isInJumpMinigame && v < 0)
+        {
+            v = 0;
+        }
 
         Vector3 dir = transform.forward * v * walkSpeed;
         dir.y = fall;
 
         transform.Rotate(0f, r * rotateSpeed * Time.deltaTime, 0f);
+
+        cc.Move(dir * Time.deltaTime);
+    }
+
+    private void SideMovement()
+    {
+        if (cc.isGrounded && fall < 0f)
+        {
+            fall = -2f;
+        }       
+
+        fall += gravityValue * Time.deltaTime;
+
+        v = Input.GetAxis("Vertical");
+        float r = Input.GetAxis("Horizontal");
+
+        
+        isMoving = v != 0 || r != 0;
+
+        Vector3 dir = transform.forward * -r * walkSpeed;
+        dir.y = fall;
+
+        //transform.Rotate(0f, r * rotateSpeed * Time.deltaTime, 0f);
 
         cc.Move(dir * Time.deltaTime);
     }
@@ -130,5 +182,14 @@ public class Player : MonoBehaviour
 
         Vector3 dir = transform.up * v * climbSpeedV + transform.right * r * climbSpeedH;
         cc.Move(dir * Time.deltaTime);
+    }
+
+    public void ResetForward()
+    {
+        cc.enabled = false;
+
+        transform.forward = Vector3.back;
+
+        cc.enabled = true;
     }
 }

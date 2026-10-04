@@ -10,6 +10,10 @@ public class GameController : MonoBehaviour
     public bool isPlaying;
     public bool isPaused;
 
+    [Header("Game Phase")]
+    public bool isInJumpMinigame;
+    public bool shouldCameraFollow;
+
     private void Awake()
     {
         if (gameController == null)
@@ -43,5 +47,18 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void BeginJumpMinigame()
+    {
+        player.jumpHeight *= 1.5f;
+        player.isInJumpMinigame = true;
+        shouldCameraFollow = true;
+    }
+
+    public void EndJumpMinigame()
+    {
+        player.jumpHeight /= 1.5f;
+        player.isInJumpMinigame = false;
+        shouldCameraFollow = false;
+    }
 
 }

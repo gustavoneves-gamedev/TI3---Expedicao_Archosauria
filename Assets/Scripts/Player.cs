@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
@@ -28,8 +29,8 @@ public class Player : MonoBehaviour
 
     public bool isInJumpMinigame;
     private float idleTime = 5f;
-    
-    
+
+
 
     void Start()
     {
@@ -49,8 +50,6 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && cc.isGrounded)
             {
                 fall = Mathf.Sqrt(jumpHeight * -2f * gravityValue);
-                //isClimbing = false;
-                //climbLockTimer = climbLock;
             }
 
             return;
@@ -153,14 +152,14 @@ public class Player : MonoBehaviour
         if (cc.isGrounded && fall < 0f)
         {
             fall = -2f;
-        }       
+        }
 
         fall += gravityValue * Time.deltaTime;
 
         v = Input.GetAxis("Vertical");
         float r = Input.GetAxis("Horizontal");
 
-        
+
         isMoving = v != 0 || r != 0;
 
         Vector3 dir = transform.forward * -r * walkSpeed;
@@ -191,5 +190,32 @@ public class Player : MonoBehaviour
         transform.forward = Vector3.back;
 
         cc.enabled = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Save"))
+        {
+            GameController.gameController.SaveGame(other.gameObject.transform.position);
+        }
+
+        if (other.CompareTag("Hole"))
+        {
+            UnityEngine.Debug.Log("a");
+            cc.enabled = false;
+            transform.position = GameController.gameController.lastSave;
+            cc.enabled = true;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "SphereTrap")
+        {
+            UnityEngine.Debug.Log("c");
+            cc.enabled = false;
+            transform.position = GameController.gameController.lastSave;
+            cc.enabled = true;
+        }
     }
 }

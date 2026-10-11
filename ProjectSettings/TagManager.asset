@@ -8,6 +8,10 @@ TagManager:
   - Ground
   - Obstacle
   - JumpMinigame
+  - Hole
+  - Trap
+  - Save
+  - SphereTrap
   layers:
   - Default
   - TransparentFX
@@ -19,7 +23,7 @@ TagManager:
   - Wall
   - Obstacle
   - Ground
-  - 
+  - Trap
   - 
   - 
   - 

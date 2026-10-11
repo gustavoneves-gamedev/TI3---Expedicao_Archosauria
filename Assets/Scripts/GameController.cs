@@ -10,6 +10,9 @@ public class GameController : MonoBehaviour
     public bool isPlaying;
     public bool isPaused;
 
+    /*[HideInInspector]*/
+    public Vector3 lastSave;
+
     [Header("Game Phase")]
     public bool isInJumpMinigame;
     public bool shouldCameraFollow;
@@ -30,7 +33,7 @@ public class GameController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     public void BeginGame()
@@ -59,6 +62,11 @@ public class GameController : MonoBehaviour
         player.jumpHeight /= 1.5f;
         player.isInJumpMinigame = false;
         shouldCameraFollow = false;
+    }
+
+    public void SaveGame(Vector3 Save)
+    {
+        lastSave = Save;
     }
 
 }

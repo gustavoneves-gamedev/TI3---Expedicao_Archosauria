@@ -1,4 +1,4 @@
-using System.Diagnostics;
+//using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
@@ -194,14 +194,20 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Save"))
+        //if (other.CompareTag("Save"))
+        //{
+        //    GameController.gameController.SaveGame(other.gameObject.transform.position);
+        //}
+
+        if (other.CompareTag("Key"))
         {
-            GameController.gameController.SaveGame(other.gameObject.transform.position);
+            GameController.gameController.hasKey = true;
+            Destroy(other.gameObject);
         }
 
         if (other.CompareTag("Hole"))
         {
-            UnityEngine.Debug.Log("a");
+            Debug.Log("a");
             cc.enabled = false;
             transform.position = GameController.gameController.lastSave;
             cc.enabled = true;
@@ -212,10 +218,12 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "SphereTrap")
         {
-            UnityEngine.Debug.Log("c");
+            Debug.Log("c");
             cc.enabled = false;
             transform.position = GameController.gameController.lastSave;
             cc.enabled = true;
         }
+
+       
     }
 }

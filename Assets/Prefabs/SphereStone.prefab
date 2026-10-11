@@ -153,3 +153,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0898d463164f23e41a979397a3a280a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Traps
+  initialSpeed: 30

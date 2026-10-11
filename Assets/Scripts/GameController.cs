@@ -17,6 +17,9 @@ public class GameController : MonoBehaviour
     public bool isInJumpMinigame;
     public bool shouldCameraFollow;
 
+    [Header("Items")]
+    public bool hasKey; //Deixei a nomenclatura genérica, mas seria a picareta inicialmente
+
     private void Awake()
     {
         if (gameController == null)

@@ -12,6 +12,8 @@ TagManager:
   - Trap
   - Save
   - SphereTrap
+  - Key
+  - Blocker
   layers:
   - Default
   - TransparentFX

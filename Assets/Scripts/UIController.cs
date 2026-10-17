@@ -9,12 +9,43 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject tabletMenu;
     [SerializeField] private GameObject jumpMinigameTutorial;
 
+    [SerializeField] private GameObject[] tutorialMenus;
+
     void Start()
     {
         GameController.gameController.uiController = this;
         mainMenu.SetActive(true);
         interfaceMenu.SetActive(false);
     }
+
+    #region Tutorial
+
+    public void ShowTutorial(int x)
+    {
+        //if (x == 0)
+        //{
+        //    FirstTuturial();
+        //}
+        //PauseGame();
+
+        if (tutorialMenus[x].activeSelf)
+        {
+            tutorialMenus[x].SetActive(false);
+        }
+        else
+        {
+            tutorialMenus[x].SetActive(true);
+        }
+        
+    }
+
+    private void FirstTuturial()
+    {
+        PauseGame();
+    }
+
+    #endregion
+
 
     // Update is called once per frame
     void Update()

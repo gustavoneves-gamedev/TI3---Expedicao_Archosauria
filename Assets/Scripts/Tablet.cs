@@ -37,6 +37,10 @@ public class Tablet : MonoBehaviour
         {
             menu.SetActive(false);
         }
+        foreach (GameObject menu in cluesMenus)
+        {
+            menu.SetActive(false);
+        }
     }
 
 }

@@ -29,6 +29,7 @@ public class Clue : MonoBehaviour
                 " do final do período Cretáceo. " +
                 "Isso significa que nossa criatura pode ter vivido entre cerca de 72 e 66 milhões de anos atrás. " +
                 "Vamos registrar essa pista em seu Diário!";
+            hasShow = false;
 
         }
         else
@@ -37,7 +38,7 @@ public class Clue : MonoBehaviour
                 "Compare novamente as características da rocha com os registros do tablet.";
         }
 
-        choiceResult.SetActive(true);
+        choiceResult.SetActive(true); 
     }
 
 
@@ -48,7 +49,7 @@ public class Clue : MonoBehaviour
             if (clueCode != 0 || clueCode == 0 && hasShow) investigateButton.SetActive(true);
             //else if (clueCode == 0 && hasShow)
 
-                GameController.gameController.player.clueFocus = clueFocus;
+            GameController.gameController.player.clueFocus = clueFocus;
             GameController.gameController.player.currentClue = clueCode;
             GameController.gameController.player.clue = this;
 
@@ -56,6 +57,14 @@ public class Clue : MonoBehaviour
             {
                 if(!hasShow) GameController.gameController.uiController.ShowTutorial(2);
                 
+                hasShow = true;
+                softBlocker.SetActive(false);
+            }
+
+            if (clueCode == 1)
+            {
+                if (!hasShow) GameController.gameController.uiController.ShowTutorial(5);
+
                 hasShow = true;
                 softBlocker.SetActive(false);
             }

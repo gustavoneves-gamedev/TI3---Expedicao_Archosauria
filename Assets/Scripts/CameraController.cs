@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
     public float moveSpeed = 5f;
 
     private Player player;
-
+    public CinemachineCamera cam;
     
     void Start()
     {
@@ -32,87 +32,25 @@ public class CameraController : MonoBehaviour
     }
 
 
-    void Update()
+    public void InvestigationCamera(Transform clueFocus)
     {
-        if (GameController.gameController.isInJumpMinigame && !GameController.gameController.shouldCameraFollow)
-        {
-            MinigameJumpCamera(moveSpeed * 10f * player.v * Time.deltaTime);
-        }
-        else if (GameController.gameController.shouldCameraFollow)
-        {
-            transform.position = target.position;
-        }
-        else
-        {
-            if (cineBrain.isActiveAndEnabled) return;
+        cam.Target.TrackingTarget = clueFocus;
 
-            //MinigameJumpCamera(40f * Time.deltaTime);
+        cineBrain.enabled = false;
+        transform.position = clueFocus.position;
+        transform.forward = clueFocus.forward;
 
-            BackToNormalCamera(40f * Time.deltaTime);
-
-            if (!backToNormal)
-            {
-                Invoke("NormalCamera", 1.25f);
-                backToNormal = true;
-            }
-            //NormalCamera();
-        }
     }
 
-
-
-    public void MinigameJumpCamera(float input = 0f)
+    public void NormalCamera()
     {
-
-        if (cineBrain.isActiveAndEnabled)
-        {
-            cineBrain.enabled = false;
-            backToNormal = false;
-        }
-
-        if (!isSetted)
-        {
-            defaultPosition = transform.position;
-            defaultForward = transform.forward;
-            isSetted = true;
-        }
-
-        if (input > 0)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, input );
-            transform.forward = Vector3.MoveTowards(transform.forward, target.forward, input / 25f );
-        }
-        else if (input < 0)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, defaultPosition, -input);
-            transform.forward = Vector3.MoveTowards(transform.forward, defaultForward, -input / 25f );
-            //backToNormal = false;
-        }
-    }
-
-    public void BackToNormalCamera(float input = 0f)
-    {
-
-        //if (cineBrain.isActiveAndEnabled)
-        //{
-        //    cineBrain.enabled = false;
-        //    backToNormal = false;
-        //}
-
-        
-        {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position + offset, input);
-            transform.forward = Vector3.MoveTowards(transform.forward, player.transform.forward, input / 20f);
-            //backToNormal = false;
-        }
-    }
-
-    private void NormalCamera()
-    {
-        if (cineBrain.isActiveAndEnabled) return;
+        cam.Target.TrackingTarget = player.transform;
 
         cineBrain.enabled = true;
-        isSetted = false;
-        GameController.gameController.player.canMove = true;
+        
+
     }
+
+
+
 }

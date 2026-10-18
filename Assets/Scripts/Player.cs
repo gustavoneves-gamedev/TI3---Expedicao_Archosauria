@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 
     public bool isMoving; //Pública apenas para fins de testes
     public bool canMove = true;
+    
 
     [Header("WALK")]
     public float rotateSpeed = 130f;
@@ -27,21 +28,29 @@ public class Player : MonoBehaviour
     [SerializeField] private bool isClimbing;
     private float climbLockTimer;
 
+    [Header("INVESTIGATE")]
+    public bool isInvestigating;
+    public int currentClue;
+    public Transform clueFocus;
+    public Clue clue;
+
     public bool isInJumpMinigame;
     private float idleTime = 5f;
-
+    [SerializeField] private CameraController mainCamera;
+    public Tablet tablet;
 
 
     void Start()
     {
         GameController.gameController.player = this;
         cc = GetComponent<CharacterController>();
+        tablet = GetComponent<Tablet>();
         obstacleLayer = LayerMask.GetMask("Obstacle");
     }
 
     void Update()
     {
-        if (!GameController.gameController.isPlaying || GameController.gameController.isPaused || !canMove) return;
+        if (!GameController.gameController.isPlaying || GameController.gameController.isPaused || !canMove || isInvestigating) return;
 
         if (isInJumpMinigame)
         {
@@ -147,6 +156,35 @@ public class Player : MonoBehaviour
         cc.Move(dir * Time.deltaTime);
     }
 
+    #region Investigation
+
+    //public void GetCurrentInvestigation()
+    //{
+
+    //}
+
+    public void EnterInvestigationMode()
+    {
+        isInvestigating = true;
+        //gameObject.GetComponent<MeshRenderer>().enabled = false;
+        mainCamera.InvestigationCamera(clueFocus);
+        clue.ChooseMenu();
+    }
+
+    //public void OpenTablet()
+    //{
+    //    tablet.ClueHelper(currentClue);
+    //}
+
+    public void ExitInvestigationMode()
+    {
+        isInvestigating = false;
+        //gameObject.GetComponent<MeshRenderer>().enabled = false;
+        mainCamera.NormalCamera();
+    }
+
+    #endregion
+
     private void SideMovement()
     {
         if (cc.isGrounded && fall < 0f)
@@ -226,4 +264,7 @@ public class Player : MonoBehaviour
 
        
     }
+
+    
+
 }

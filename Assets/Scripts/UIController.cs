@@ -10,6 +10,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject jumpMinigameTutorial;
 
     [SerializeField] private GameObject[] tutorialMenus;
+    [SerializeField] private GameObject clueChoiceMenu;
+    private int tutorialCounter;
 
     void Start()
     {
@@ -22,11 +24,8 @@ public class UIController : MonoBehaviour
 
     public void ShowTutorial(int x)
     {
-        //if (x == 0)
-        //{
-        //    FirstTuturial();
-        //}
-        //PauseGame();
+        
+        //tutorialCounter++;
 
         if (tutorialMenus[x].activeSelf)
         {
@@ -39,10 +38,19 @@ public class UIController : MonoBehaviour
         
     }
 
-    private void FirstTuturial()
+    #endregion
+
+    #region Investigation
+
+    public void CloseTablet()
     {
-        PauseGame();
+        if (GameController.gameController.player.isInvestigating)
+        {
+            clueChoiceMenu.SetActive(true);
+        }
     }
+
+    //public void 
 
     #endregion
 

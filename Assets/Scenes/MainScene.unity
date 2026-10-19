@@ -26814,7 +26814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb1a972417b4924d9f0e572a073e797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Checkpoint
-  minigame: {fileID: 0}
+  minigame: {fileID: 191710240}
 --- !u!4 &1313987006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1330583855083616485, guid: 03086ef1aea45c6448fd0033886cf2c5, type: 3}

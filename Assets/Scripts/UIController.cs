@@ -7,6 +7,11 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject interfaceMenu;
     [SerializeField] private GameObject controlMenu;
     [SerializeField] private GameObject tabletMenu;
+    [SerializeField] private GameObject jumpMinigameTutorial;
+
+    [SerializeField] private GameObject[] tutorialMenus;
+    [SerializeField] private GameObject clueChoiceMenu;
+    private int tutorialCounter;
 
     void Start()
     {
@@ -14,6 +19,41 @@ public class UIController : MonoBehaviour
         mainMenu.SetActive(true);
         interfaceMenu.SetActive(false);
     }
+
+    #region Tutorial
+
+    public void ShowTutorial(int x)
+    {
+        
+        //tutorialCounter++;
+
+        if (tutorialMenus[x].activeSelf)
+        {
+            tutorialMenus[x].SetActive(false);
+        }
+        else
+        {
+            tutorialMenus[x].SetActive(true);
+        }
+        
+    }
+
+    #endregion
+
+    #region Investigation
+
+    public void CloseTablet()
+    {
+        if (GameController.gameController.player.isInvestigating)
+        {
+            clueChoiceMenu.SetActive(true);
+        }
+    }
+
+    //public void 
+
+    #endregion
+
 
     // Update is called once per frame
     void Update()
@@ -53,5 +93,10 @@ public class UIController : MonoBehaviour
         {
             controlMenu.SetActive(true);
         }
+    }
+
+    public void ShowJumpMinigameControls()
+    {
+        jumpMinigameTutorial.SetActive(true);
     }
 }

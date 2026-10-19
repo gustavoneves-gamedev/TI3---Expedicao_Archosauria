@@ -10,6 +10,16 @@ public class GameController : MonoBehaviour
     public bool isPlaying;
     public bool isPaused;
 
+    /*[HideInInspector]*/
+    public Vector3 lastSave;
+
+    [Header("Game Phase")]
+    public bool isInJumpMinigame;
+    public bool shouldCameraFollow;
+
+    [Header("Items")]
+    public bool hasKey; //Deixei a nomenclatura genérica, mas seria a picareta inicialmente
+
     private void Awake()
     {
         if (gameController == null)
@@ -26,7 +36,7 @@ public class GameController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     public void BeginGame()
@@ -43,5 +53,23 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void BeginJumpMinigame()
+    {
+        player.jumpHeight *= 1.5f;
+        player.isInJumpMinigame = true;
+        shouldCameraFollow = true;
+    }
+
+    public void EndJumpMinigame()
+    {
+        player.jumpHeight /= 1.5f;
+        player.isInJumpMinigame = false;
+        shouldCameraFollow = false;
+    }
+
+    public void SaveGame(Vector3 Save)
+    {
+        lastSave = Save;
+    }
 
 }

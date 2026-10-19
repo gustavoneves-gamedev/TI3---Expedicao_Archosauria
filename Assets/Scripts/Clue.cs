@@ -12,6 +12,8 @@ public class Clue : MonoBehaviour
     [SerializeField] private GameObject choiceResult;
     [SerializeField] private TextMeshProUGUI choiceText;
     [SerializeField] private GameObject softBlocker;
+    public string correctAnswer;
+    public string wrongAnswer;
     private bool hasShow;
 
     public void ChooseMenu()
@@ -24,18 +26,13 @@ public class Clue : MonoBehaviour
                 
         if (option == correctOption)
         {
-            choiceText.text = "Muito bem! " +
-                "Essas características são compatíveis com a Formação Serra da Galga," +
-                " do final do período Cretáceo. " +
-                "Isso significa que nossa criatura pode ter vivido entre cerca de 72 e 66 milhões de anos atrás. " +
-                "Vamos registrar essa pista em seu Diário!";
+            choiceText.text = correctAnswer;
             hasShow = false;
-
+            gameObject.SetActive(false);
         }
         else
         {
-            choiceText.text = "Essa hipótese não combina com todas as pistas." +
-                "Compare novamente as características da rocha com os registros do tablet.";
+            choiceText.text = wrongAnswer;
         }
 
         choiceResult.SetActive(true); 

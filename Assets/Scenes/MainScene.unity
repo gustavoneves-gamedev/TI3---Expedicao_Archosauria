@@ -2953,6 +2953,12 @@ MonoBehaviour:
   choiceResult: {fileID: 1219306102}
   choiceText: {fileID: 437566021}
   softBlocker: {fileID: 1212303476}
+  correctAnswer: " Muito bem! Essas caracter\xEDsticas s\xE3o compat\xEDveis com
+    a Forma\xE7\xE3o Serra da Galga, do final do per\xEDodo Cret\xE1ceo.                 
+    Isso significa que nossa criatura pode ter vivido entre cerca de 72 e 66 milh\xF5es
+    de anos atr\xE1s.                 Vamos registrar essa pista em seu Di\xE1rio!"
+  wrongAnswer: "Essa hip\xF3tese n\xE3o combina com todas as pistas.                
+    Compare novamente as caracter\xEDsticas da rocha com os registros do tablet."
 --- !u!135 &157082479
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6795,7 +6801,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.12635002, y: -0.44523576, z: 0.063625425, w: 0.88416773}
-  m_LocalPosition: {x: -186.95047, y: 67.420204, z: -83.695244}
+  m_LocalPosition: {x: -200.54047, y: 61.9202, z: -63.00525}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9902,7 +9908,7 @@ Transform:
   m_GameObject: {fileID: 442008125}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.44975883, z: -0, w: 0.8931501}
-  m_LocalPosition: {x: -186.46596, y: 65.4, z: -84.05434}
+  m_LocalPosition: {x: -200.05595, y: 59.9, z: -63.364338}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16665,7 +16671,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.22184673, y: 1}
-  m_AnchoredPosition: {x: -8.736938, y: -0}
+  m_AnchoredPosition: {x: -8.737061, y: 0}
   m_SizeDelta: {x: -26.8737, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &819090660
@@ -22017,7 +22023,7 @@ Transform:
   m_GameObject: {fileID: 1063839779}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.44975883, z: -0, w: 0.8931501}
-  m_LocalPosition: {x: -194.5, y: 62, z: -78.1}
+  m_LocalPosition: {x: -208.09, y: 56.5, z: -57.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -30125,7 +30131,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 157082478}
+      - m_Target: {fileID: 1922806452}
         m_TargetAssemblyTypeName: Clue, Assembly-CSharp
         m_MethodName: ChooseOption
         m_Mode: 3
@@ -33633,7 +33639,7 @@ Transform:
   m_GameObject: {fileID: 1761157018}
   serializedVersion: 2
   m_LocalRotation: {x: 0.12635002, y: -0.44523582, z: 0.063625425, w: 0.88416773}
-  m_LocalPosition: {x: -186.95047, y: 67.420204, z: -83.695244}
+  m_LocalPosition: {x: -200.54047, y: 61.9202, z: -63.00525}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -36675,7 +36681,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 157082478}
+      - m_Target: {fileID: 1922806452}
         m_TargetAssemblyTypeName: Clue, Assembly-CSharp
         m_MethodName: ChooseOption
         m_Mode: 3
@@ -37243,8 +37249,12 @@ MonoBehaviour:
   clueFocus: {fileID: 701682428}
   choiceMenu: {fileID: 961495785}
   choiceResult: {fileID: 521456913}
-  choiceText: {fileID: 437566021}
+  choiceText: {fileID: 1532018356}
   softBlocker: {fileID: 1212303476}
+  correctAnswer: "Excelente! Essas caracter\xEDsticas s\xE3o compat\xEDveis com os
+    f\xF3sseis, encontrados. Isso significa que nossa criatura tinha uma alimenta\xE7\xE3o
+    constitu\xEDda principalmente por plantas. Vamos registrar essa pista!"
+  wrongAnswer: BURRO! TENTE NOVAMENTE!
 --- !u!135 &1922806453
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -1,5 +1,5 @@
 using TMPro;
-using UnityEditor.UI;
+//using UnityEditor.UI;
 using UnityEngine;
 
 public class Clue : MonoBehaviour

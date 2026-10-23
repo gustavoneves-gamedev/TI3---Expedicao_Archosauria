@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
             Movement();
         }
 
-        DetectMovement();
+       // DetectMovement();
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -108,26 +108,26 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void DetectMovement()
-    {
-        isMoving = cc.velocity.sqrMagnitude > 0.01f;
+    //private void DetectMovement()
+    //{
+    //    isMoving = cc.velocity.sqrMagnitude > 0.01f;
 
-        if (cc.velocity.magnitude <= 0)
-        {
-            idleTime -= Time.deltaTime;
+    //    if (cc.velocity.magnitude <= 0)
+    //    {
+    //        idleTime -= Time.deltaTime;
 
-            if (idleTime < 0)
-            {
-                idleTime = 0;
-                GameController.gameController.uiController.ShowControls(false);
-            }
-        }
-        else
-        {
-            idleTime = 5;
-            GameController.gameController.uiController.ShowControls(true);
-        }
-    }
+    //        if (idleTime < 0)
+    //        {
+    //            idleTime = 0;
+    //            GameController.gameController.uiController.ShowControls(false);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        idleTime = 5;
+    //        GameController.gameController.uiController.ShowControls(true);
+    //    }
+    //}
 
     private void Movement()
     {

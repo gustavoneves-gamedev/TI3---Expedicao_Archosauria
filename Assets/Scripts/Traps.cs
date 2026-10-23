@@ -41,13 +41,5 @@ public class Traps : MonoBehaviour
         //}
     }
 
-    //public void Hit()
-    //{
-    //    if (rb == null) return;
-    //    rb.AddForce(transform.forward * hitForce);
-    //}
-    //public void HitDelay()
-    //{
-    //    Invoke("Hit", delay);
-    //}
+    
 }

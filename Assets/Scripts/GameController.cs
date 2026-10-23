@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
 
     public bool isPlaying;
     public bool isPaused;
+    public bool isTutorialCompleted;
 
     /*[HideInInspector]*/
     public Vector3 lastSave;

@@ -12,6 +12,7 @@ public class MinigameTrigger : MonoBehaviour
 
     private void SpawnObstacle()
     {
+        StopAllCoroutines();
         StartCoroutine(SpawnRocks());
     }
 

@@ -30,10 +30,12 @@ public class UIController : MonoBehaviour
         if (tutorialMenus[x].activeSelf)
         {
             tutorialMenus[x].SetActive(false);
+            
         }
         else
         {
             tutorialMenus[x].SetActive(true);
+            
         }
         
     }
@@ -66,6 +68,8 @@ public class UIController : MonoBehaviour
         mainMenu.SetActive(false);
         interfaceMenu.SetActive(true);
         GameController.gameController.BeginGame();
+        GameController.gameController.player.canMove = false;
+        ShowTutorial(0);
     }
 
     public void PauseGame()
@@ -77,22 +81,16 @@ public class UIController : MonoBehaviour
     public void ResumeGame()
     {
         GameController.gameController.ResumeGame();
+        GameController.gameController.player.canMove = true;
         tabletMenu.SetActive(false);
     }
 
 
-    public void ShowControls(bool isMoving = true)
+    public void ShowControls()
     {
-
-        if (isMoving && controlMenu.activeSelf)
-        {
-            controlMenu.SetActive(false);
-
-        }
-        else if (!isMoving && !controlMenu.activeSelf)
-        {
-            controlMenu.SetActive(true);
-        }
+        
+            controlMenu.SetActive(true);       
+        
     }
 
     public void ShowJumpMinigameControls()

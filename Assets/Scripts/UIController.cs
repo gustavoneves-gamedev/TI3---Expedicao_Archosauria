@@ -18,26 +18,27 @@ public class UIController : MonoBehaviour
         GameController.gameController.uiController = this;
         mainMenu.SetActive(true);
         interfaceMenu.SetActive(false);
+        FreeCursor(true);
     }
 
     #region Tutorial
 
     public void ShowTutorial(int x)
     {
-        
+
         //tutorialCounter++;
 
         if (tutorialMenus[x].activeSelf)
         {
             tutorialMenus[x].SetActive(false);
-            
+
         }
         else
         {
             tutorialMenus[x].SetActive(true);
-            
+
         }
-        
+
     }
 
     #endregion
@@ -68,7 +69,7 @@ public class UIController : MonoBehaviour
         mainMenu.SetActive(false);
         interfaceMenu.SetActive(true);
         GameController.gameController.BeginGame();
-        GameController.gameController.player.canMove = false;
+        //GameController.gameController.player.canMove = false;
         ShowTutorial(0);
     }
 
@@ -81,20 +82,35 @@ public class UIController : MonoBehaviour
     public void ResumeGame()
     {
         GameController.gameController.ResumeGame();
-        GameController.gameController.player.canMove = true;
+        //GameController.gameController.player.canMove = true;
         tabletMenu.SetActive(false);
     }
 
 
     public void ShowControls()
     {
-        
-            controlMenu.SetActive(true);       
-        
+
+        controlMenu.SetActive(true);
+
     }
 
     public void ShowJumpMinigameControls()
     {
         jumpMinigameTutorial.SetActive(true);
     }
+
+    public void FreeCursor(bool free)
+    {
+        if (!free)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        if (free)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
 }

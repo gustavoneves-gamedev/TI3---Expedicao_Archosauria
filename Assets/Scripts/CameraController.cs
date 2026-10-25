@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     private bool backToNormal;
     public float moveSpeed = 5f;
 
-    private Player player;
+    private PlayerRB player;
     public CinemachineCamera cam;
     
     void Start()
@@ -47,8 +47,6 @@ public class CameraController : MonoBehaviour
         cam.Target.TrackingTarget = player.transform;
 
         cineBrain.enabled = true;
-        
-
     }
 
 

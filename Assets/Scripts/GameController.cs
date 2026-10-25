@@ -4,7 +4,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController gameController;
 
-    public Player player;
+    public PlayerRB player;
     public UIController uiController;
 
     public bool isPlaying;

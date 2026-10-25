@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        GameController.gameController.player = this;
+        //GameController.gameController.player = this;
         cc = GetComponent<CharacterController>();
         tablet = GetComponent<Tablet>();
         obstacleLayer = LayerMask.GetMask("Obstacle");

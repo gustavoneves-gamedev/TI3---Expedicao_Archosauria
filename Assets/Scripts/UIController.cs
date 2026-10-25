@@ -25,20 +25,26 @@ public class UIController : MonoBehaviour
 
     public void ShowTutorial(int x)
     {
+        tutorialMenus[x].SetActive(true);
 
-        //tutorialCounter++;
+        //if (tutorialMenus[x].activeSelf)
+        //{
+        //    tutorialMenus[x].SetActive(false);
 
-        if (tutorialMenus[x].activeSelf)
+        //}
+        //else
+        //{
+        //    tutorialMenus[x].SetActive(true);
+
+        //}
+    }
+
+    public void CloseTutorial()
+    {
+        foreach (GameObject tutorial in tutorialMenus)
         {
-            tutorialMenus[x].SetActive(false);
-
+            tutorial.SetActive(false);
         }
-        else
-        {
-            tutorialMenus[x].SetActive(true);
-
-        }
-
     }
 
     #endregion

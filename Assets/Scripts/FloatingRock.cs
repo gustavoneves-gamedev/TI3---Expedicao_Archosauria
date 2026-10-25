@@ -18,4 +18,10 @@ public class FloatingRock : MonoBehaviour
         rb.linearVelocity = -transform.forward * initialSpeed * speedMultiplier;
         Destroy(gameObject, 30f);
     }
+
+    private void FixedUpdate()
+    {
+        
+    }
+
 }

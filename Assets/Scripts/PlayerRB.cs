@@ -124,13 +124,14 @@ public class PlayerRB : MonoBehaviour
 
     //public void OpenTablet()
     //{
-    //    tablet.ClueHelper(currentClue);
+    //    tablet.ClueHelper();
     //}
 
     public void ExitInvestigationMode()
     {
         isInvestigating = false;
         //gameObject.GetComponent<MeshRenderer>().enabled = false;
+        GameController.gameController.uiController.FreeCursor(false);
         mainCamera.NormalCamera();
     }
 

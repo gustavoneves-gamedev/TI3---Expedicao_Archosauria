@@ -8,8 +8,9 @@ public class TutorialTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameController.gameController.uiController.ShowTutorial(tutorialNumber);
             gameObject.SetActive(false);
+            GameController.gameController.uiController.ShowTutorial(tutorialNumber);
+            GameController.gameController.uiController.FreeCursor(true);
 
         }
     }

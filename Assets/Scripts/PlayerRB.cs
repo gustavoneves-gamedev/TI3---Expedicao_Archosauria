@@ -15,22 +15,24 @@ public class PlayerRB : MonoBehaviour
     public float walkSpeed = 10f;
     public float jumpHeight = 2.5f;
     private Vector3 dir;
+    [SerializeField] private float vel = 12f;
 
     [Header("JUMP")]
     [SerializeField] private bool possibleJump;
-    public float jumpForce = 5f;
+    //public float jumpForce = 5f;
+    public Vector3 jumpForce;
 
     [Header("LOOK")]
     public float mouseSensitivity = 2f;
 
     [Header("CLIMB")]
-    public float climbSpeedV = 5f;
-    public float climbSpeedH = 5f;
-    public float obstacleMaxDistance = 0.6f;
-    public float climbLock = 0.3f;
-    private LayerMask surfaceLayer;
-    [SerializeField] private bool isClimbing;
-    private float climbLockTimer;
+    //public float climbSpeedV = 5f;
+    //public float climbSpeedH = 5f;
+    //public float obstacleMaxDistance = 0.6f;
+    //public float climbLock = 0.3f;
+    //private LayerMask surfaceLayer;
+    //[SerializeField] private bool isClimbing;
+    //private float climbLockTimer;
 
     [Header("INVESTIGATE")]
     public bool isInvestigating;
@@ -41,7 +43,8 @@ public class PlayerRB : MonoBehaviour
     public bool isInJumpMinigame;
     private float idleTime = 5f;
     [SerializeField] private CameraController mainCamera;
-    [SerializeField] private float vel = 12f;
+    
+    public Vector3 gravityForce;
 
     public Tablet tablet;
 
@@ -50,7 +53,8 @@ public class PlayerRB : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         tablet = GetComponent<Tablet>();
-        surfaceLayer = LayerMask.GetMask("Ground" + "Obstacle" + "Wall");
+        GameController.gameController.player = this;
+       // surfaceLayer = LayerMask.GetMask("Ground" + "Obstacle" + "Wall");
     }
 
     void Update()
@@ -61,17 +65,25 @@ public class PlayerRB : MonoBehaviour
             return;
         }
 
-        possibleJump = Physics.Raycast(transform.position, Vector3.down, 1.15f, ~0, QueryTriggerInteraction.Ignore);
+        //possibleJump = Physics.Raycast(transform.position, Vector3.down, 1.15f, ~0, QueryTriggerInteraction.Ignore);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //Vector3 jumpImpulse = new Vector3(0f, jumpForce, 0f);
+
+            // Aplica a força instantânea
+            rb.AddForce(jumpForce, ForceMode.Impulse);
+        }
 
         Look();
-        Movement();
+       
 
     }
 
     void FixedUpdate()
     {
-        Vector3 velocidadeAlvo = dir * vel;
-        rb.linearVelocity = new Vector3(velocidadeAlvo.x, rb.linearVelocity.y, velocidadeAlvo.z);
+        Movement();
+       
     }
 
     private void Look()
@@ -86,15 +98,13 @@ public class PlayerRB : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");
 
         dir = (transform.forward * v + transform.right * h).normalized;
-        isMoving = dir.sqrMagnitude > 0.01f;
+        isMoving = dir.sqrMagnitude > 0.01f;        
+            
+        rb.AddForce(gravityForce, ForceMode.Force);
 
-        if (Input.GetKeyDown(KeyCode.Space) && possibleJump)
-        {
-            Vector3 jumpImpulse = new Vector3(0f, jumpForce, 0f);
 
-            // Aplica a força instantânea
-            rb.AddForce(jumpImpulse, ForceMode.Impulse);
-        }
+        Vector3 velocidadeAlvo = dir * vel;
+        rb.linearVelocity = new Vector3(velocidadeAlvo.x, rb.linearVelocity.y, velocidadeAlvo.z);
     }
 
     #region Investigation

@@ -20199,6 +20199,7 @@ GameObject:
   - component: {fileID: 947681597}
   - component: {fileID: 947681596}
   - component: {fileID: 947681595}
+  - component: {fileID: 947681601}
   - component: {fileID: 947681594}
   - component: {fileID: 947681600}
   m_Layer: 6
@@ -20223,23 +20224,19 @@ MonoBehaviour:
   isMoving: 0
   canMove: 1
   rotateSpeed: 130
-  walkSpeed: 12
+  walkSpeed: 15
   jumpHeight: 2.5
+  vel: 16
   possibleJump: 0
-  jumpForce: 8
+  jumpForce: {x: 0, y: 30, z: 0}
   mouseSensitivity: 2
-  climbSpeedV: 5
-  climbSpeedH: 5
-  obstacleMaxDistance: 0.6
-  climbLock: 0.3
-  isClimbing: 0
   isInvestigating: 0
   currentClue: 0
   clueFocus: {fileID: 0}
   clue: {fileID: 0}
   isInJumpMinigame: 0
   mainCamera: {fileID: 0}
-  vel: 12
+  gravityForce: {x: 0, y: -60, z: 0}
   tablet: {fileID: 0}
 --- !u!136 &947681595
 CapsuleCollider:
@@ -20383,11 +20380,34 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
+--- !u!136 &947681601
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947681593}
+  m_Material: {fileID: 13400000, guid: bc4c34965e5d07445a00e1d48d629fd6, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.72
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1 &950790329
 GameObject:
   m_ObjectHideFlags: 0

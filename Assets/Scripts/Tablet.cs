@@ -17,6 +17,7 @@ public class Tablet : MonoBehaviour
 
     public void ClueHelper()
     {
+        GameController.gameController.PauseGame();
         ResetMainMenus();
         tablet.SetActive(true);
       //  player.isInvestigating = true;
@@ -24,13 +25,13 @@ public class Tablet : MonoBehaviour
         cluesMenus[player.currentClue].gameObject.SetActive(true);
     }
 
-    //public void ExitClueHelper()
-    //{
-    //    if (player.isInvestigating)
-    //    {
-
-    //    }
-    //}
+    public void ShowControls()
+    {
+        GameController.gameController.PauseGame();
+        ResetMainMenus();
+        tablet.SetActive(true);
+        mainScreenMenus[2].SetActive(true);
+    }    
 
     private void ResetMainMenus()
     {

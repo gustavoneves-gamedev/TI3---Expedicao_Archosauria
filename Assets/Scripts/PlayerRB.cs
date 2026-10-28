@@ -65,9 +65,9 @@ public class PlayerRB : MonoBehaviour
             return;
         }
 
-        //possibleJump = Physics.Raycast(transform.position, Vector3.down, 1.15f, ~0, QueryTriggerInteraction.Ignore);
+        possibleJump = Physics.Raycast(transform.position, Vector3.down, 1.15f, ~0, QueryTriggerInteraction.Ignore);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && possibleJump)
         {
             //Vector3 jumpImpulse = new Vector3(0f, jumpForce, 0f);
 

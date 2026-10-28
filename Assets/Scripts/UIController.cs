@@ -27,6 +27,10 @@ public class UIController : MonoBehaviour
     {
         tutorialMenus[x].SetActive(true);
 
+        if (!GameController.gameController.isPaused) GameController.gameController.PauseGame();
+
+        //if (!GameController.gameController.isPaused) GameController.gameController.isPaused = true;
+
         //if (tutorialMenus[x].activeSelf)
         //{
         //    tutorialMenus[x].SetActive(false);
@@ -45,11 +49,14 @@ public class UIController : MonoBehaviour
         {
             tutorial.SetActive(false);
         }
+
+        GameController.gameController.ResumeGame();
+        
     }
 
     #endregion
 
-    #region Investigation
+   
 
     public void CloseTablet()
     {
@@ -57,11 +64,13 @@ public class UIController : MonoBehaviour
         {
             clueChoiceMenu.SetActive(true);
         }
+
+        GameController.gameController.uiController.FreeCursor(false);
     }
 
     //public void 
 
-    #endregion
+   
 
 
     // Update is called once per frame
@@ -111,11 +120,13 @@ public class UIController : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            Debug.Log("Fui desativado");
         }
         if (free)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            Debug.Log("Fui Ativado");
         }
     }
 

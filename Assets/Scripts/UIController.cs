@@ -65,7 +65,7 @@ public class UIController : MonoBehaviour
             clueChoiceMenu.SetActive(true);
         }
 
-        GameController.gameController.uiController.FreeCursor(false);
+        if(!GameController.gameController.player.isInvestigating) GameController.gameController.uiController.FreeCursor(false);
     }
 
     //public void 

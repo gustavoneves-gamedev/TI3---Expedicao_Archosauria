@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 
 public class PlayerRB : MonoBehaviour
@@ -10,13 +11,13 @@ public class PlayerRB : MonoBehaviour
     public bool canMove = true;
 
     public GameObject defaltCamera;
-    public GameObject parkourCamera;
+    
 
 
     [Header("WALK")]
     //public float rotateSpeed = 130f;
     public float walkSpeed = 12f;
-    public float jumpHeight = 2.5f; // usso aq é do charackter controller não é mais usado deixei ai pq tem uns negocio q vc fez q tao chamando ele se tirar vai dar erro
+    public float jumpHeight = 2.5f; // isso aq é do character controller não é mais usado deixei ai pq tem uns negocio q vc fez q tao chamando ele se tirar vai dar erro
     private Vector3 dir;
     
 
@@ -42,6 +43,10 @@ public class PlayerRB : MonoBehaviour
     public int currentClue;
     public Transform clueFocus;
     public Clue clue;
+
+    [Header("PARKOUR")]
+    public GameObject parkourCamera;
+    [SerializeField] private bool inParkour = false;
 
     public bool isInJumpMinigame;
     private float idleTime = 5f;
@@ -80,7 +85,7 @@ public class PlayerRB : MonoBehaviour
             climbLockTimer = climbLock;
         }
 
-        Look();
+        if(!inParkour)Look();
     }
 
     void FixedUpdate()
@@ -90,9 +95,14 @@ public class PlayerRB : MonoBehaviour
         {
             rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
         }
-        else*/ if (isClimbing)
+        else*/
+        if (isClimbing)
         {
-            Climb();  
+            Climb();
+        }
+        else if (inParkour)
+        {
+            Parkour();
         }
         else Movement();
     }
@@ -116,6 +126,29 @@ public class PlayerRB : MonoBehaviour
 
         Vector3 velocidadeAlvo = dir * walkSpeed;
         rb.linearVelocity = new Vector3(velocidadeAlvo.x, rb.linearVelocity.y, velocidadeAlvo.z);
+    }
+
+    private void Parkour()
+    {
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+
+        dir = (transform.forward * h + transform.right * v * -1).normalized;
+        isMoving = dir.sqrMagnitude > 0.01f;
+
+        rb.AddForce(gravityForce, ForceMode.Force);
+
+
+        Vector3 velocidadeAlvo = dir * walkSpeed;
+        rb.linearVelocity = new Vector3(velocidadeAlvo.x, rb.linearVelocity.y, velocidadeAlvo.z);
+    }
+
+    IEnumerator EnterParkur()
+    {
+        defaltCamera.gameObject.SetActive(!defaltCamera.gameObject.activeSelf);
+        parkourCamera.gameObject.SetActive(!parkourCamera.gameObject.activeSelf);
+        yield return new WaitForSeconds(0.5f);
+        inParkour = !inParkour;
     }
 
     #region Investigation
@@ -171,8 +204,10 @@ public class PlayerRB : MonoBehaviour
 
         if (other.CompareTag("Parkour"))
         {
-            defaltCamera.gameObject.SetActive(!defaltCamera.gameObject.activeSelf);
-            parkourCamera.gameObject.SetActive(!parkourCamera.gameObject.activeSelf);
+            StartCoroutine(EnterParkur());
+            //defaltCamera.gameObject.SetActive(!defaltCamera.gameObject.activeSelf);
+            //parkourCamera.gameObject.SetActive(!parkourCamera.gameObject.activeSelf);
+            //inParkour = !inParkour;
         }
     }
 

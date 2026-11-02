@@ -9,6 +9,9 @@ public class PlayerRB : MonoBehaviour
     public bool isMoving;
     public bool canMove = true;
 
+    public GameObject defaltCamera;
+    public GameObject parkourCamera;
+
 
     [Header("WALK")]
     //public float rotateSpeed = 130f;
@@ -66,17 +69,18 @@ public class PlayerRB : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && PossibleJump())
+        if (Input.GetKeyDown(KeyCode.Space) && (PossibleJump() || isClimbing))
         {
             //Vector3 jumpImpulse = new Vector3(0f, jumpForce, 0f);
 
-            // Aplica a força instantânea
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
             rb.AddForce(jumpForce, ForceMode.Impulse);
+
+            isClimbing = false;
+            climbLockTimer = climbLock;
         }
 
         Look();
-
-
     }
 
     void FixedUpdate()
@@ -164,6 +168,12 @@ public class PlayerRB : MonoBehaviour
 
             transform.position = GameController.gameController.lastSave;
         }
+
+        if (other.CompareTag("Parkour"))
+        {
+            defaltCamera.gameObject.SetActive(!defaltCamera.gameObject.activeSelf);
+            parkourCamera.gameObject.SetActive(!parkourCamera.gameObject.activeSelf);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -194,8 +204,13 @@ public class PlayerRB : MonoBehaviour
 
     public void Climbing()
     {
-
-        if (ObstacleAhead())
+        if (climbLockTimer > 0f)
+        {
+            climbLockTimer -= Time.fixedDeltaTime;
+            isClimbing = false;
+            return;
+        }
+        else if (ObstacleAhead())
         {
             Debug.Log("d");
             isClimbing = true;
@@ -214,5 +229,4 @@ public class PlayerRB : MonoBehaviour
 
         rb.linearVelocity = transform.up * v * climbSpeedV + transform.right * h * climbSpeedH;
     }
-
 }

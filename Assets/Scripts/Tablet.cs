@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Tablet : MonoBehaviour
 {
-    private Player player;
+    private PlayerRB player;
 
     [SerializeField] private GameObject tablet;
     [SerializeField] private GameObject[] mainScreenMenus;
@@ -12,24 +12,26 @@ public class Tablet : MonoBehaviour
 
     void Start()
     {
-        player = GetComponent<Player>();
+        player = GetComponent<PlayerRB>();
     }
 
     public void ClueHelper()
     {
+        GameController.gameController.PauseGame();
         ResetMainMenus();
         tablet.SetActive(true);
+      //  player.isInvestigating = true;
         mainScreenMenus[1].SetActive(true);
         cluesMenus[player.currentClue].gameObject.SetActive(true);
     }
 
-    //public void ExitClueHelper()
-    //{
-    //    if (player.isInvestigating)
-    //    {
-
-    //    }
-    //}
+    public void ShowControls()
+    {
+        GameController.gameController.PauseGame();
+        ResetMainMenus();
+        tablet.SetActive(true);
+        mainScreenMenus[2].SetActive(true);
+    }    
 
     private void ResetMainMenus()
     {

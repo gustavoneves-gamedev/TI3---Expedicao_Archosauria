@@ -17,12 +17,13 @@ public class CameraController : MonoBehaviour
     private bool backToNormal;
     public float moveSpeed = 5f;
 
-    private Player player;
+    private PlayerRB player;
     public CinemachineCamera cam;
     
     void Start()
     {
-        cineBrain = GetComponent<CinemachineBrain>();
+        //cineBrain = GetComponent<CinemachineBrain>();
+        
         Invoke("Initialize", .2f);
     }
 
@@ -32,11 +33,13 @@ public class CameraController : MonoBehaviour
     }
 
 
+
     public void InvestigationCamera(Transform clueFocus)
     {
-        cam.Target.TrackingTarget = clueFocus;
-
-        cineBrain.enabled = false;
+        //cam.Target.TrackingTarget = clueFocus;
+        defaultForward = transform.forward;
+        defaultPosition = transform.position;
+        //cineBrain.enabled = false;
         transform.position = clueFocus.position;
         transform.forward = clueFocus.forward;
 
@@ -44,11 +47,10 @@ public class CameraController : MonoBehaviour
 
     public void NormalCamera()
     {
-        cam.Target.TrackingTarget = player.transform;
-
-        cineBrain.enabled = true;
-        
-
+        //cam.Target.TrackingTarget = player.transform;
+        transform.forward = defaultForward;
+        transform.position = defaultPosition;
+        //cineBrain.enabled = true;
     }
 
 

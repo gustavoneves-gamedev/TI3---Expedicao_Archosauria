@@ -14,7 +14,7 @@ public class Clue : MonoBehaviour
     [SerializeField] private GameObject softBlocker;
     public string correctAnswer;
     public string wrongAnswer;
-    private bool hasShow;
+    public bool hasShow;
 
     public void ChooseMenu()
     {
@@ -46,6 +46,7 @@ public class Clue : MonoBehaviour
             if (clueCode != 0 || clueCode == 0 && hasShow) investigateButton.SetActive(true);
             //else if (clueCode == 0 && hasShow)
 
+            GameController.gameController.uiController.FreeCursor(true);
             GameController.gameController.player.clueFocus = clueFocus;
             GameController.gameController.player.currentClue = clueCode;
             GameController.gameController.player.clue = this;

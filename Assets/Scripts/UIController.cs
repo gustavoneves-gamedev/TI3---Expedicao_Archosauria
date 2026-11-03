@@ -18,29 +18,45 @@ public class UIController : MonoBehaviour
         GameController.gameController.uiController = this;
         mainMenu.SetActive(true);
         interfaceMenu.SetActive(false);
+        FreeCursor(true);
     }
 
     #region Tutorial
 
     public void ShowTutorial(int x)
     {
-        
-        //tutorialCounter++;
+        tutorialMenus[x].SetActive(true);
 
-        if (tutorialMenus[x].activeSelf)
+        if (!GameController.gameController.isPaused) GameController.gameController.PauseGame();
+
+        //if (!GameController.gameController.isPaused) GameController.gameController.isPaused = true;
+
+        //if (tutorialMenus[x].activeSelf)
+        //{
+        //    tutorialMenus[x].SetActive(false);
+
+        //}
+        //else
+        //{
+        //    tutorialMenus[x].SetActive(true);
+
+        //}
+    }
+
+    public void CloseTutorial()
+    {
+        foreach (GameObject tutorial in tutorialMenus)
         {
-            tutorialMenus[x].SetActive(false);
+            tutorial.SetActive(false);
         }
-        else
-        {
-            tutorialMenus[x].SetActive(true);
-        }
+
+        GameController.gameController.ResumeGame();
         
     }
 
     #endregion
 
-    #region Investigation
+   
 
     public void CloseTablet()
     {
@@ -48,11 +64,13 @@ public class UIController : MonoBehaviour
         {
             clueChoiceMenu.SetActive(true);
         }
+
+        if(!GameController.gameController.player.isInvestigating) GameController.gameController.uiController.FreeCursor(false);
     }
 
     //public void 
 
-    #endregion
+   
 
 
     // Update is called once per frame
@@ -66,6 +84,8 @@ public class UIController : MonoBehaviour
         mainMenu.SetActive(false);
         interfaceMenu.SetActive(true);
         GameController.gameController.BeginGame();
+        //GameController.gameController.player.canMove = false;
+        ShowTutorial(0);
     }
 
     public void PauseGame()
@@ -77,26 +97,37 @@ public class UIController : MonoBehaviour
     public void ResumeGame()
     {
         GameController.gameController.ResumeGame();
+        //GameController.gameController.player.canMove = true;
         tabletMenu.SetActive(false);
     }
 
 
-    public void ShowControls(bool isMoving = true)
+    public void ShowControls()
     {
 
-        if (isMoving && controlMenu.activeSelf)
-        {
-            controlMenu.SetActive(false);
+        controlMenu.SetActive(true);
 
-        }
-        else if (!isMoving && !controlMenu.activeSelf)
-        {
-            controlMenu.SetActive(true);
-        }
     }
 
     public void ShowJumpMinigameControls()
     {
         jumpMinigameTutorial.SetActive(true);
     }
+
+    public void FreeCursor(bool free)
+    {
+        if (!free)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Debug.Log("Fui desativado");
+        }
+        if (free)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Debug.Log("Fui Ativado");
+        }
+    }
+
 }

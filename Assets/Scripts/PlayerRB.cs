@@ -25,6 +25,10 @@ public class PlayerRB : MonoBehaviour
     [SerializeField] private bool possibleJump;
     //public float jumpForce = 5f;
     public Vector3 jumpForce;
+    public float coyoteTime = 0.12f;
+    private float coyoteTimer;
+
+    public float deadlySpeed = 30f;
 
     [Header("LOOK")]
     public float mouseSensitivity = 2f;
@@ -47,6 +51,8 @@ public class PlayerRB : MonoBehaviour
     [Header("PARKOUR")]
     public GameObject parkourCamera;
     [SerializeField] private bool inParkour = false;
+    public float rotateSpeed = 12f;
+    public Vector3 sideParkour = new Vector3(0f, 0f, 1f);
 
     public bool isInJumpMinigame;
     private float idleTime = 5f;
@@ -74,18 +80,26 @@ public class PlayerRB : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && (PossibleJump() || isClimbing))
+        if (PossibleJump() && rb.linearVelocity.y <= 0.1f)
         {
-            //Vector3 jumpImpulse = new Vector3(0f, jumpForce, 0f);
+            coyoteTimer = coyoteTime;
+        }
+        else
+        {
+            coyoteTimer -= Time.deltaTime;
+        }
 
+        if (Input.GetKeyDown(KeyCode.Space) && (coyoteTimer > 0f || isClimbing || PossibleJump()))
+        {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
             rb.AddForce(jumpForce, ForceMode.Impulse);
 
+            coyoteTimer = 0f;
             isClimbing = false;
             climbLockTimer = climbLock;
         }
 
-        if(!inParkour)Look();
+        if (!inParkour)Look();
     }
 
     void FixedUpdate()
@@ -131,16 +145,23 @@ public class PlayerRB : MonoBehaviour
     private void Parkour()
     {
         float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
 
-        dir = (transform.forward * h + transform.right * v * -1).normalized;
-        isMoving = dir.sqrMagnitude > 0.01f;
+        isMoving = h != 0;
 
         rb.AddForce(gravityForce, ForceMode.Force);
 
-
-        Vector3 velocidadeAlvo = dir * walkSpeed;
+        Vector3 velocidadeAlvo = sideParkour * h * walkSpeed;
         rb.linearVelocity = new Vector3(velocidadeAlvo.x, rb.linearVelocity.y, velocidadeAlvo.z);
+
+        
+
+        //Vira para o lado em que anda
+        if (h != 0)
+        {
+            Quaternion alvo = Quaternion.LookRotation(sideParkour * h, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, alvo, rotateSpeed * Time.deltaTime);
+            //transform.forward = sideParkour * h;
+        }
     }
 
     IEnumerator EnterParkur()
@@ -213,6 +234,11 @@ public class PlayerRB : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.relativeVelocity.y >= deadlySpeed)
+        {
+            transform.position = GameController.gameController.lastSave;
+        }
+
         if (collision.gameObject.tag == "SphereTrap")
         {
             Debug.Log("c");

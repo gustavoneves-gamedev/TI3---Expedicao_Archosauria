@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
     public bool shouldCameraFollow;
 
     [Header("Items")]
-    public bool hasKey; //Deixei a nomenclatura genérica, mas seria a picareta inicialmente
+    public bool hasPickaxe; //Deixei a nomenclatura genérica, mas seria a picareta inicialmente
 
     private void Awake()
     {

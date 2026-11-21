@@ -9,6 +9,12 @@ public class Tablet : MonoBehaviour
     //[SerializeField] private GameObject enciclopediaMenu;
     [SerializeField] private GameObject[] cluesMenus;
     //[SerializeField]
+    public bool foundClue1;
+    [SerializeField] private GameObject clueLog1;
+    public bool foundClue2;
+    [SerializeField] private GameObject clueLog2;
+    public bool foundClue3;
+    [SerializeField] private GameObject clueLog3;
 
     void Start()
     {
@@ -33,11 +39,26 @@ public class Tablet : MonoBehaviour
         mainScreenMenus[2].SetActive(true);
     }
 
+    public void UpdateClues(int x = 0)
+    {
+        if (x == 0) foundClue1 = true;
+        else if (x == 1) foundClue2 = true;
+        else if (x == 2) foundClue3 = true;
+    }
+
     public void ShowLog()
     {
-        ResetMainMenus();
-        tablet.SetActive(true);
-        mainScreenMenus[1].SetActive(true);
+        //ResetMainMenus();
+        //tablet.SetActive(true);
+        mainScreenMenus[0].SetActive(true);
+        UpdateLog();
+    }
+
+    public void UpdateLog()
+    {
+        if (foundClue1) clueLog1.SetActive(true);
+        if (foundClue2) clueLog2.SetActive(true);
+        if (foundClue3) clueLog3.SetActive(true);
     }
 
     private void ResetMainMenus()

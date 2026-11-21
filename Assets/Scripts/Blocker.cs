@@ -9,7 +9,7 @@ public class Blocker : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.CompareTag("Player") && GameController.gameController.hasKey)
+        if (other.CompareTag("Player") && GameController.gameController.hasPickaxe)
         {
             //GameController.gameController.hasKey = true;
             Destroy(blocker);

@@ -239,7 +239,7 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("Key"))
         {
-            GameController.gameController.hasKey = true;
+            GameController.gameController.hasPickaxe = true;
             Destroy(other.gameObject);
         }
 

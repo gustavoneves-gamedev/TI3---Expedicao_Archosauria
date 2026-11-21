@@ -12,6 +12,7 @@ public class Clue : MonoBehaviour
     [SerializeField] private GameObject choiceResult;
     [SerializeField] private TextMeshProUGUI choiceText;
     [SerializeField] private GameObject softBlocker;
+    [SerializeField] private GameObject clueLog;
     public string correctAnswer;
     public string wrongAnswer;
     public bool hasShow;
@@ -29,6 +30,9 @@ public class Clue : MonoBehaviour
             choiceText.text = correctAnswer;
             hasShow = false;
             gameObject.SetActive(false);
+            //clueLog.SetActive(true);
+            GameController.gameController.player.tablet.UpdateClues(clueCode);
+            GameController.gameController.player.tablet.UpdateLog();
         }
         else
         {

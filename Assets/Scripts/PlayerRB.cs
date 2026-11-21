@@ -48,6 +48,10 @@ public class PlayerRB : MonoBehaviour
     public Transform clueFocus;
     public Clue clue;
 
+    [Header("EQUIPS")]
+    [SerializeField] private GameObject equipLogPickaxe;
+    [SerializeField] private GameObject equipLogBoots;
+
     [Header("PARKOUR")]
     public GameObject parkourCamera;
     [SerializeField] private bool inParkour = false;
@@ -60,7 +64,9 @@ public class PlayerRB : MonoBehaviour
 
     public Vector3 gravityForce;
 
+    [Header("TABLET")]
     public Tablet tablet;
+    public GameObject tabletScreen;
 
     void Start()
     {
@@ -80,6 +86,22 @@ public class PlayerRB : MonoBehaviour
             rb.linearVelocity = Vector3.zero;
             return;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !isInvestigating)
+        {
+            if (!tabletScreen.gameObject.activeSelf)
+            {
+                tabletScreen.gameObject.SetActive(true);
+                GameController.gameController.uiController.FreeCursor(true);
+            }
+            else
+            {
+                tabletScreen.gameObject.SetActive(false);
+                GameController.gameController.uiController.FreeCursor(false);
+            }
+
+        }         
+
 
         if (PossibleJump() && rb.linearVelocity.y <= 0.1f)
         {
@@ -219,9 +241,10 @@ public class PlayerRB : MonoBehaviour
         //    GameController.gameController.SaveGame(other.gameObject.transform.position);
         //}
 
-        if (other.CompareTag("Key"))
+        if (other.CompareTag("Pickaxe"))
         {
-            GameController.gameController.hasKey = true;
+            GameController.gameController.hasPickaxe = true;
+            equipLogPickaxe.SetActive(true);
             Destroy(other.gameObject);
         }
 

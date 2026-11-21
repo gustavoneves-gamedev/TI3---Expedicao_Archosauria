@@ -12,9 +12,9 @@ TagManager:
   - Trap
   - Save
   - SphereTrap
-  - Key
   - Blocker
   - Parkour
+  - Pickaxe
   layers:
   - Default
   - TransparentFX

@@ -31,7 +31,14 @@ public class Tablet : MonoBehaviour
         ResetMainMenus();
         tablet.SetActive(true);
         mainScreenMenus[2].SetActive(true);
-    }    
+    }
+
+    public void ShowLog()
+    {
+        ResetMainMenus();
+        tablet.SetActive(true);
+        mainScreenMenus[1].SetActive(true);
+    }
 
     private void ResetMainMenus()
     {

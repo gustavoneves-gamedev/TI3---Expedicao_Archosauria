@@ -77,6 +77,7 @@ public class PlayerRB : MonoBehaviour
         if (!GameController.gameController.isPlaying || GameController.gameController.isPaused || !canMove || isInvestigating)
         {
             dir = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
             return;
         }
 
@@ -104,6 +105,14 @@ public class PlayerRB : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        if (!GameController.gameController.isPlaying || GameController.gameController.isPaused || !canMove || isInvestigating)
+        {
+            dir = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
+            return;
+        }
+
         Climbing();
         /*if (!GameController.gameController.isPlaying || !canMove || isInvestigating)
         {

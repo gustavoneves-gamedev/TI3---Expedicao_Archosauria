@@ -59,13 +59,13 @@ public class Clue : MonoBehaviour
                 softBlocker.SetActive(false);
             }
 
-            if (clueCode == 1)
-            {
-                if (!hasShow) GameController.gameController.uiController.ShowTutorial(5);
+            //if (clueCode == 1)
+            //{
+            //    if (!hasShow) GameController.gameController.uiController.ShowTutorial(5);
 
-                hasShow = true;
-                softBlocker.SetActive(false);
-            }
+            //    hasShow = true;
+            //    softBlocker.SetActive(false);
+            //}
 
         }
     }

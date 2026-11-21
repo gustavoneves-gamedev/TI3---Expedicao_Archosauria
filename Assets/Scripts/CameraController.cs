@@ -11,10 +11,13 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private Vector3 offset;
 
-    private Vector3 defaultForward;
-    private Vector3 defaultPosition;    
-    private bool isSetted;
-    private bool backToNormal;
+    public Vector3 defaultForward;
+    public Vector3 defaultPosition;
+
+    public bool shouldFollow;
+    
+    public Transform defaultCameraPosition;
+    
     public float moveSpeed = 5f;
 
     private PlayerRB player;
@@ -32,6 +35,13 @@ public class CameraController : MonoBehaviour
         player = GameController.gameController.player;
     }
 
+    private void Update()
+    {
+        if (!shouldFollow) return;
+        
+        transform.position = defaultCameraPosition.position;
+        transform.rotation = defaultCameraPosition.rotation;
+    }
 
 
     public void InvestigationCamera(Transform clueFocus)

@@ -195,12 +195,22 @@ public class PlayerRB : MonoBehaviour
         }
     }
 
-    IEnumerator EnterParkur()
+    IEnumerator EnterParkur(bool ep)
     {
-        defaltCamera.gameObject.SetActive(!defaltCamera.gameObject.activeSelf);
-        parkourCamera.gameObject.SetActive(!parkourCamera.gameObject.activeSelf);
-        yield return new WaitForSeconds(0.5f);
-        inParkour = !inParkour;
+        if (ep)
+        {
+            defaltCamera.gameObject.SetActive(!ep);
+            parkourCamera.gameObject.SetActive(ep);
+            yield return new WaitForSeconds(0.5f);
+            inParkour = true;
+        }
+        else
+        {
+            defaltCamera.gameObject.SetActive(ep);
+            parkourCamera.gameObject.SetActive(!ep);
+            yield return new WaitForSeconds(0.5f);
+            inParkour = false;
+        }
     }
 
     #region Investigation
@@ -257,7 +267,14 @@ public class PlayerRB : MonoBehaviour
 
         if (other.CompareTag("Parkour"))
         {
-            StartCoroutine(EnterParkur());
+            StartCoroutine(EnterParkur(true));
+            //defaltCamera.gameObject.SetActive(!defaltCamera.gameObject.activeSelf);
+            //parkourCamera.gameObject.SetActive(!parkourCamera.gameObject.activeSelf);
+            //inParkour = !inParkour;
+        }
+        if (other.CompareTag("OutParkour"))
+        {
+            StartCoroutine(EnterParkur(false));
             //defaltCamera.gameObject.SetActive(!defaltCamera.gameObject.activeSelf);
             //parkourCamera.gameObject.SetActive(!parkourCamera.gameObject.activeSelf);
             //inParkour = !inParkour;
